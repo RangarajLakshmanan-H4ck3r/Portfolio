@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        /* Basic page styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif;
+            background-color: #000000;
+            color: #f0f0f0;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 20px;
+            text-align: right;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #f0f0f0;
+            left: 50%;
+            bottom: 0;
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* About section */
+        .about-text {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            animation: slideUp 1s ease-in-out;
+        }
+        .about-text img {
+    display: block; /* Set the display to block */
+    margin: 0 auto; /* Auto margins to center the image */
+    width: 150px; /* Set image width */
+    height: auto; /* Keep aspect ratio */
+    border-radius: 50%; /* Make the image circular */
+    margin-bottom: 20px; /* Space below the image */
+}
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .about-name {
+            font-size: 4em !important; /* Force larger font size */
+            font-weight: bolder;
+            background: linear-gradient(45deg, #00d816, #00d9ff, #ffffff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textColorChange 3s ease-in-out infinite;
+            letter-spacing: 2px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        @keyframes textColorChange {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Skills Section */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px; /* Adds space between items */
+        }
+
+        .skill {
+            flex: 1 2 30%; /* Each skill takes up approximately 45% of the row */
+            min-width: 100px; /* Ensures that skills don't get too small */
+            background: linear-gradient(45deg, #00d816, #00d9ff, #ffffff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; /* Light background for skill boxes */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px;
+            transition: transform 0.2s;
+        }
+
+        .skill:hover {
+            transform: scale(0.5); /* Slightly enlarge on hover */
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            width: 100%;
+            border: 2px solid rgb(255, 255, 255);
+            background-color: #ffffff;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border: 0.1px solid white; /* White border */
+    border-radius: 10px; /* Rounded corners */
+    transition: background-color 0.3s, border-color 0.3s; 
+            background-color: #000000;
+            width: var(--progress-value);
+            border-radius: 5px;
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: #000000;
+            text-align: center;
+        }
+
+        #contact p {
+            color: #f0f0f0;
+        }
+
+        footer {
+            background-color: #000000;
+            padding: 10px;
+            text-align: center;
+            color: #f0f0f0;
+        }
+
+        a {
+            color: #00b4d8;
+            text-decoration: none;
+        }
+        .portfolio-items {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    gap: 20px; /* Space between rows */
+}
+
+.portfolio-row {
+    display: flex; /* Align portfolio items in a row */
+    justify-content: space-between; /* Space items evenly */
+    gap: 20px; /* Space between projects */
+}
+
+.portfolio-item {
+    background:transparent; /* Light background for portfolio items */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px;
+    text-align: center; /* Center-align text */
+    flex: 1 1 calc(50% - 20px); /* Two items per row, accounting for the gap */
+    min-width: 300px; /* Minimum width for items */
+    transition: transform 0.2s;
+}
+
+.portfolio-item img {
+    width: 100%; /* Make image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+.portfolio-item h3 {
+    margin: 10px 0; /* Space around the title */
+}
+
+.portfolio-item p {
+    margin: 10px 0; /* Space around the description */
+}
+
+.portfolio-item a {
+    display: inline-block; /* Make link a block element */
+    margin-top: 10px; /* Space above the link */
+    color: #007BFF; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.2s;
+}
+
+.portfolio-item a:hover {
+    color: #0056b3; /* Darker color on hover */
+}
+
+.resume-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.resume-image {
+    max-width: 200px; /* Set a maximum width for the image */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space between image and button */
+}
+
+.resume-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #000000; /* Green background */
+    color: white; /* White text */
+    text-decoration: none; /* Remove underline */
+    border: 2px solid white; /* White border */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+.resume-button:hover {
+    background-color: #ffffff; /* Darker green on hover */
+    border-color: #000000;
+    color:black /* Change border color on hover */
+}
+
+
+        
+
+
+    </style>
+</head>
+
+<body>
+    <!-- Header with buttons in top right -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container" data-aos="fade-up">
+            <div class="about-text">
+                <img src="images\hacker.png"/>
+                <p class="about-name">Rangaraj Lakshmanan</p>
+                <p>Hello, I'm Rangaraj, a passionate Cyber Security professional and Web Designer. I specialize in creating secure and user-friendly web interfaces while ensuring robust protection against threats. My expertise includes web development technologies, ethical hacking, and penetration testing, with a focus on delivering innovative and effective solutions for real-world challenges.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <!-- Skills Section -->
+<section id="skills">
+    <div class="container">
+        <h2 data-aos="zoom-in">Skills</h2>
+        <div class="skills">
+            <div class="skill" data-aos="slide-right" data-aos-delay="100">
+                <h3>Python</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress-value: 80%;"></div>
+                </div>
+            </div>
+
+            <div class="skill" data-aos="slide-up" data-aos-delay="110">
+                <h3>Web Designing</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress-value: 75%;"></div>
+                </div>
+            </div>
+
+            <div class="skill" data-aos="slide-left" data-aos-delay="120">
+                <h3>Vulnerability Assessment</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress-value: 70%;"></div>
+                </div>
+            </div>
+
+            <div class="skill" data-aos="slide-right" data-aos-delay="130">
+                <h3>Ethical Hacking</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress-value: 80%;"></div>
+                </div>
+            </div>
+
+            <div class="skill" data-aos="slide-up" data-aos-delay="140">
+                <h3>Linux</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress-value: 75%;"></div>
+                </div>
+            </div>
+
+            <div class="skill" data-aos="slide-left" data-aos-delay="150">
+                <h3>Networking</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="--progress-value: 60%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><br><br><br>
+
+<!-- Portfolio Section -->
+<section id="portfolio">
+    <div class="container">
+        <h2 data-aos="zoom-in">Portfolio</h2>
+        <div class="portfolio-items">
+            <!-- Row 1 -->
+            <div class="portfolio-row">
+                <!-- Project 1 -->
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/Criptic_Ceaser.png"/>
+                    <h3>CripticCeaser - A Cyber Security Education Website</h3>
+                    <p>The Cybersecurity Education Platform provides hands-on training in various encryption techniques, empowering users to understand and implement essential security measures. Additionally, it keeps users updated with the latest security news and trends, ensuring they stay informed in an ever-evolving digital landscape.</p>
+                    <a href="https://www.linkedin.com/in/rangaraj-l" target="_blank">View on LinkedIn</a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/keylogger.png"/>
+                    <h3>Keylogger - Python</h3>
+                    <p>Keylogger Project: This Python-based keylogger utilizes the pynput library to capture keystrokes and the smtplib module for secure transmission of the recorded data as a text file. It demonstrates effective methods for monitoring keyboard activity while prioritizing data security during transfer.</p>
+                    <a href="https://www.linkedin.com/in/rangaraj-l" target="_blank">View on LinkedIn</a>
+                </div>
+            </div>
+
+            <!-- Row 2 (if needed) 
+            <div class="portfolio-row">
+                
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Project Title 3</h3>
+                    <p>Brief description of Project 3 goes here. Explain what technologies were used, and what the project achieves.</p>
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank">View on LinkedIn</a>
+                </div>
+
+                
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Project Title 4</h3>
+                    <p>Brief description of Project 4 goes here. Explain what technologies were used, and what the project achieves.</p>
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank">View on LinkedIn</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+
+<section id="resume" class="resume-section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <h2>My Resume</h2>
+    <p>You can download my resume using the link below:</p></div>
+    <div class="container" data-aos="fade-down" data-aos-delay="100">
+    <img src="images\resume.png" alt="My Resume" class="resume-image"/></div><br>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <a href="Web Designer.pdf" target="_blank" class="resume-button">Download Resume</a></div>
+
+</section>
+
+<br><br><br>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 data-aos="zoom-in">Contact</h2>
+            <p>If you'd like to get in touch, feel free to reach out via email at <a href="mailto:rangarajlakhsmanan@gmail.com">rangarajlakhsmanan@gmail.com</a> or connect with me on <a href="https://www.linkedin.com/in/rangaraj-l" target="_blank">LinkedIn</a>.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Rangaraj Lakshmanan. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
